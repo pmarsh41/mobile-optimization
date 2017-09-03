@@ -1,29 +1,22 @@
 module.exports = function(grunt) {
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-        // 1. All configuration goes here
-        grunt.initConfig({
-            pkg: grunt.file.readJSON('package.json'),
-
-            uglify: {
-                build: {
-                    src: 'js/perfmatters.js',
-                    dest: 'js/perfmatters.min.js'
-                }
+    // 1. All configuration goes here
+    grunt.initConfig({
+        cssmin: {
+            target: {
+                files: [{
+                    expand: true,
+                    cwd: 'css',
+                    src: ['*.css', '!*min.css'],
+                    dest: 'dist/css',
+                    ext: '.min.css'
+                }]
             }
-            Htmlmin: {
-                build: {
-                    src: '/index.html',
-                    dest: '/index.html.min'
-                }
-            }
-        });
+        }
+    });
 
-        // 3. Where we tell Grunt we plan to use this plug-in.
-        grunt.loadNpmTasks('grunt-contrib-uglify');
-        grunt.loadNpmTasks('grunt-contrib-htmlmin');
-
-        // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-        grunt.registerTask('default', ['uglify']);
-        grunt.registerTask('default', ['htmlmin']);
+    // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
+    grunt.registerTask('default', ['cssmin']);
 
 };
